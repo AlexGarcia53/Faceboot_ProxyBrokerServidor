@@ -16,30 +16,36 @@ import interfaces.ILogica;
  * @author Admin
  */
 public class ProxyServidor {
-    private ILogica logica;
     
     public ProxyServidor(){
-        this.logica= FabricaLogica.crearLogica();
+        
     }
     
-    public Solicitud realizarSolicitudRegistrarUsuario(Solicitud solicitud, Usuario usuario){
-        try{
-            logica.registrarUsuario(usuario);
-            solicitud.setRespuesta("Se ha registrado correctamente al usuario");
-        } catch(Exception e){
-            solicitud.setRespuesta(e.getMessage());
-        }
-        return solicitud;
-    }
-    
-    public String serializarRespuesta(String respuesta){
-        throw new UnsupportedOperationException();
-    }
-    
-    public Usuario deserealizarSolicitudRegistrarUsuario(Solicitud solicitud){
+    public Solicitud deserealizarSolicitud(String solicitud){
         try{
             ObjectMapper conversion= new ObjectMapper();
-            return conversion.readValue(solicitud.getSolicitud(), Usuario.class);
+            return conversion.readValue(solicitud, Solicitud.class);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    public String serializarRespuesta(Solicitud respuesta){
+        try{
+            ObjectMapper mapper=new ObjectMapper();
+            String solicitudSerializada= mapper.writeValueAsString(respuesta);
+            return solicitudSerializada;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Usuario deserealizarUsuario(String usuario){
+        try{
+            ObjectMapper conversion= new ObjectMapper();
+            return conversion.readValue(usuario, Usuario.class);
         } catch(Exception e){
             System.out.println(e.getMessage());
         }

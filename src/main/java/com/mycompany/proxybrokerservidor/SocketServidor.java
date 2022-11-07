@@ -4,8 +4,11 @@
  */
 package com.mycompany.proxybrokerservidor;
 
+import com.mycompany.logicafaceboot.FabricaLogica;
+import dominio.Operacion;
 import dominio.Solicitud;
 import dominio.Usuario;
+import interfaces.ILogica;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -22,6 +25,7 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class SocketServidor implements Runnable {
+    private ILogica logica;
     private SocketServidor socketServidor;
     private Socket socket;
     private BufferedReader bufferedReader;
@@ -37,6 +41,7 @@ public class SocketServidor implements Runnable {
             this.bufferedReader= new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.socketServidor=this;
             this.proxyServidor= new ProxyServidor();
+            this.logica= FabricaLogica.crearLogica();
         } catch (IOException e){
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
@@ -44,20 +49,22 @@ public class SocketServidor implements Runnable {
     
     @Override
     public void run() {
-        String solicitud; Solicitud respuesta;
+        String solicitud, respuestaSerializada; Solicitud respuesta;
         
         while(socket.isConnected()){
             try{
                 System.out.println("xd");
                 solicitud= bufferedReader.readLine();
                 System.out.println(solicitud.toString());
-                String[] arregloSolicitud= solicitud.split(",");
-                Solicitud objetoSolicitud= new Solicitud(arregloSolicitud[0], arregloSolicitud[1]);
-                objetoSolicitud.setRespuesta(arregloSolicitud[2]);
-                Usuario usuario= proxyServidor.deserealizarSolicitudRegistrarUsuario(objetoSolicitud);
-                respuesta= proxyServidor.realizarSolicitudRegistrarUsuario(objetoSolicitud, usuario);
-                System.out.println(respuesta);
-                retransmitirRespuesta(respuesta.toString());
+                respuesta= this.canalizarSolicitud(solicitud);
+//                String[] arregloSolicitud= solicitud.split(",");
+//                Solicitud objetoSolicitud= new Solicitud(arregloSolicitud[0], arregloSolicitud[1]);
+//                objetoSolicitud.setRespuesta(arregloSolicitud[2]);
+//                Usuario usuario= proxyServidor.deserealizarSolicitudRegistrarUsuario(objetoSolicitud);
+//                respuesta= proxyServidor.realizarSolicitudRegistrarUsuario(objetoSolicitud, usuario);
+                respuestaSerializada= proxyServidor.serializarRespuesta(respuesta);
+                System.out.println(respuestaSerializada);
+                retransmitirRespuesta(respuestaSerializada);
             }catch(IOException e){
                 e.printStackTrace();
 //                closeEverything(socket, bufferedReader, bufferedWriter);
@@ -90,5 +97,27 @@ public class SocketServidor implements Runnable {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+    
+    public Solicitud canalizarSolicitud(String solicitud){
+        Solicitud objetoSolicitud = proxyServidor.deserealizarSolicitud(solicitud);
+        Operacion tipoOperacion= objetoSolicitud.getOperacion();
+        Usuario usuario = proxyServidor.deserealizarUsuario(objetoSolicitud.getSolicitud());
+        switch (tipoOperacion) {
+            case registrar_usuario:
+                return this.realizarSolicitudRegistrarUsuario(objetoSolicitud, usuario);
+            default:
+                return null;
+        }
+    }
+    
+    public Solicitud realizarSolicitudRegistrarUsuario(Solicitud solicitud, Usuario usuario){
+        try{
+            logica.registrarUsuario(usuario);
+            solicitud.setRespuesta("Se ha registrado correctamente al usuario");
+        } catch(Exception e){
+            solicitud.setRespuesta(e.getMessage());
+        }
+        return solicitud;
     }
 }
