@@ -8,6 +8,8 @@ import com.mycompany.logicafaceboot.FabricaLogica;
 import dominio.Operacion;
 import dominio.Solicitud;
 import dominio.Usuario;
+import excepciones.ErrorBusquedaUsuarioException;
+import excepciones.ErrorGuardarUsuarioException;
 import interfaces.ILogica;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -106,6 +108,8 @@ public class SocketServidor implements Runnable {
         switch (tipoOperacion) {
             case registrar_usuario:
                 return this.realizarSolicitudRegistrarUsuario(objetoSolicitud, usuario);
+            case iniciar_sesion:
+                return this.realizarInicioSesion(objetoSolicitud, usuario);
             default:
                 return null;
         }
@@ -113,10 +117,21 @@ public class SocketServidor implements Runnable {
     
     public Solicitud realizarSolicitudRegistrarUsuario(Solicitud solicitud, Usuario usuario){
         try{
-            logica.registrarUsuario(usuario);
-            solicitud.setRespuesta("Se ha registrado correctamente al usuario");
-        } catch(Exception e){
-            solicitud.setRespuesta(e.getMessage());
+            Usuario usuarioRegistrado= logica.registrarUsuario(usuario);
+            solicitud.setRespuesta(proxyServidor.serializarUsuario(usuarioRegistrado));
+        } catch(ErrorGuardarUsuarioException e){
+            System.out.println("si entro al catch");
+            solicitud.setRespuesta("Excepción: "+e.getMessage());
+        }
+        return solicitud;
+    }
+    
+    public Solicitud realizarInicioSesion(Solicitud solicitud, Usuario usuario){
+        try{
+            Usuario usuarioRegistrado= logica.consultarUsuario(usuario);
+            solicitud.setRespuesta(proxyServidor.serializarUsuario(usuarioRegistrado));
+        } catch (ErrorBusquedaUsuarioException e){
+            solicitud.setRespuesta("Excepción: "+e.getMessage());
         }
         return solicitud;
     }

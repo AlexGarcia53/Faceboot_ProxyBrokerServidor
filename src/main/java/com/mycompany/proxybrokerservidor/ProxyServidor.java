@@ -21,6 +21,17 @@ public class ProxyServidor {
         
     }
     
+    public String serializarUsuario(Usuario usuario){
+        try{
+            ObjectMapper mapper=new ObjectMapper();
+            String solicitudSerializada= mapper.writeValueAsString(usuario);
+            return solicitudSerializada;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public Solicitud deserealizarSolicitud(String solicitud){
         try{
             ObjectMapper conversion= new ObjectMapper();
