@@ -6,6 +6,7 @@ package com.mycompany.proxybrokerservidor;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
 import dominio.Operacion;
+import dominio.Publicacion;
 import dominio.Solicitud;
 import dominio.Usuario;
 import excepciones.ErrorBusquedaUsuarioException;
@@ -126,12 +127,22 @@ public class SocketServidor implements Runnable {
         return solicitud;
     }
     
-    public Solicitud realizarInicioSesion(Solicitud solicitud, Usuario usuario){
-        try{
-            Usuario usuarioRegistrado= logica.consultarUsuario(usuario);
+    public Solicitud realizarInicioSesion(Solicitud solicitud, Usuario usuario) {
+        try {
+            Usuario usuarioRegistrado = logica.consultarUsuario(usuario);
             solicitud.setRespuesta(proxyServidor.serializarUsuario(usuarioRegistrado));
-        } catch (ErrorBusquedaUsuarioException e){
-            solicitud.setRespuesta("Excepción: "+e.getMessage());
+        } catch (ErrorBusquedaUsuarioException e) {
+            solicitud.setRespuesta("Excepción: " + e.getMessage());
+        }
+        return solicitud;
+    }
+
+    public Solicitud realizarPublicacion(Solicitud solicitud, Publicacion publicacion) {
+        try {
+            Publicacion publicacionRegistrada = logica.registrarPublicacion(publicacion);
+            solicitud.setRespuesta(proxyServidor.serializarPublicacion(publicacionRegistrada));
+        } catch (ErrorBusquedaUsuarioException e) {
+            solicitud.setRespuesta("Excepción: " + e.getMessage());
         }
         return solicitud;
     }

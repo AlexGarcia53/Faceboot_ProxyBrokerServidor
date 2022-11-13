@@ -6,6 +6,7 @@ package com.mycompany.proxybrokerservidor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.logicafaceboot.FabricaLogica;
+import dominio.Publicacion;
 import dominio.Solicitud;
 import dominio.Usuario;
 import interfaces.ILogica;
@@ -57,6 +58,27 @@ public class ProxyServidor {
         try{
             ObjectMapper conversion= new ObjectMapper();
             return conversion.readValue(usuario, Usuario.class);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    public String serializarPublicacion(Publicacion publicacion) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String solicitudSerializada = mapper.writeValueAsString(publicacion);
+            return solicitudSerializada;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Publicacion deserealizarPublicacion(String publicacion){
+        try{
+            ObjectMapper conversion= new ObjectMapper();
+            return conversion.readValue(publicacion, Publicacion.class);
         } catch(Exception e){
             System.out.println(e.getMessage());
         }
