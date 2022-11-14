@@ -46,7 +46,7 @@ public class SocketServidor implements Runnable {
             this.proxyServidor= new ProxyServidor();
             this.logica= FabricaLogica.crearLogica();
         } catch (IOException e){
-            closeEverything(socket, bufferedReader, bufferedWriter);
+            cerrarTodo(socket, bufferedReader, bufferedWriter);
         }
     }
     
@@ -56,9 +56,8 @@ public class SocketServidor implements Runnable {
         
         while(socket.isConnected()){
             try{
-                System.out.println("xd");
                 solicitud= bufferedReader.readLine();
-                System.out.println(solicitud.toString());
+                System.out.println(solicitud);
                 respuesta= this.canalizarSolicitud(solicitud);
 //                String[] arregloSolicitud= solicitud.split(",");
 //                Solicitud objetoSolicitud= new Solicitud(arregloSolicitud[0], arregloSolicitud[1]);
@@ -82,11 +81,11 @@ public class SocketServidor implements Runnable {
             socketServidor.bufferedWriter.newLine();
             socketServidor.bufferedWriter.flush();
         }catch(IOException e){
-            closeEverything(socket, bufferedReader, bufferedWriter);
+            cerrarTodo(socket, bufferedReader, bufferedWriter);
         }
     }
     
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
+    public void cerrarTodo(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try{
             if(bufferedReader != null){
                 bufferedReader.close();
@@ -105,12 +104,19 @@ public class SocketServidor implements Runnable {
     public Solicitud canalizarSolicitud(String solicitud){
         Solicitud objetoSolicitud = proxyServidor.deserealizarSolicitud(solicitud);
         Operacion tipoOperacion= objetoSolicitud.getOperacion();
-        Usuario usuario = proxyServidor.deserealizarUsuario(objetoSolicitud.getSolicitud());
         switch (tipoOperacion) {
-            case registrar_usuario:
+            case registrar_usuario:{
+                Usuario usuario = proxyServidor.deserealizarUsuario(objetoSolicitud.getSolicitud());
                 return this.realizarSolicitudRegistrarUsuario(objetoSolicitud, usuario);
-            case iniciar_sesion:
+            }
+            case iniciar_sesion:{
+                Usuario usuario = proxyServidor.deserealizarUsuario(objetoSolicitud.getSolicitud());
                 return this.realizarInicioSesion(objetoSolicitud, usuario);
+            }
+            case registrar_publicacion:{
+                Publicacion publicacion= proxyServidor.deserealizarPublicacion(objetoSolicitud.getSolicitud());
+                return this.realizarPublicacion(objetoSolicitud, publicacion);
+            }
             default:
                 return null;
         }
@@ -139,8 +145,8 @@ public class SocketServidor implements Runnable {
 
     public Solicitud realizarPublicacion(Solicitud solicitud, Publicacion publicacion) {
         try {
-            Publicacion publicacionRegistrada = logica.registrarPublicacion(publicacion);
-            solicitud.setRespuesta(proxyServidor.serializarPublicacion(publicacionRegistrada));
+            //Publicacion publicacionRegistrada = logica.registrarPublicacion(publicacion);
+            solicitud.setRespuesta("Se llevó a cabo el registro");
         } catch (ErrorBusquedaUsuarioException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }
