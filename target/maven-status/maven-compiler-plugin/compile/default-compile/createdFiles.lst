@@ -1,4 +1,9 @@
+interfaces\IEstrategia.class
+strategy\EstrategiaRegistrarUsuario.class
 com\mycompany\proxybrokerservidor\SocketServidor$1.class
+com\mycompany\proxybrokerservidor\ProxyServidor.class
+strategy\ContextoCanalizacion.class
+strategy\EstrategiaIniciarSesion.class
+strategy\EstrategiaCrearPublicacion.class
 com\mycompany\proxybrokerservidor\Servidor.class
 com\mycompany\proxybrokerservidor\SocketServidor.class
-com\mycompany\proxybrokerservidor\ProxyServidor.class

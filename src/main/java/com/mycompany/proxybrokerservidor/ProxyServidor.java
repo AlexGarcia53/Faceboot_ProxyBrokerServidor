@@ -18,8 +18,17 @@ import interfaces.ILogica;
  */
 public class ProxyServidor {
     
-    public ProxyServidor(){
+    private static ProxyServidor proxyServidor;
+    
+    private ProxyServidor(){
         
+    }
+    
+    public static ProxyServidor getInstancia(){
+        if(ProxyServidor.proxyServidor==null){
+            ProxyServidor.proxyServidor= new ProxyServidor();
+        }
+        return ProxyServidor.proxyServidor;
     }
     
     public String serializarUsuario(Usuario usuario){
