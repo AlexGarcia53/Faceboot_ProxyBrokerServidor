@@ -4,6 +4,8 @@
  */
 package strategy;
 
+import com.mycompany.proxybrokerservidor.ProxyServidor;
+import dominio.Operacion;
 import dominio.Solicitud;
 import interfaces.IEstrategia;
 
@@ -13,6 +15,42 @@ import interfaces.IEstrategia;
  */
 public class ContextoCanalizacion {
     private IEstrategia estrategia;
+    private static ContextoCanalizacion contextoCanalizacion;
+    
+    private ContextoCanalizacion(){
+        
+    }
+    
+    public static ContextoCanalizacion getInstancia(){
+        if(contextoCanalizacion==null){
+            contextoCanalizacion= new ContextoCanalizacion();
+        }
+        return contextoCanalizacion;
+    }
+    
+    public Solicitud canalizarSolicitud(String solicitud){
+        Solicitud objetoSolicitud = ProxyServidor.getInstancia().deserealizarSolicitud(solicitud);
+        Operacion tipoOperacion= objetoSolicitud.getOperacion();
+        switch (tipoOperacion) {
+            case registrar_usuario:{
+                contextoCanalizacion.setEstrategia(new EstrategiaRegistrarUsuario());
+                break;
+            }
+            case iniciar_sesion:{
+                contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesion());
+                break;
+            }
+            case registrar_publicacion:{
+                contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
+                break;
+            }
+            default:{
+                contextoCanalizacion.setEstrategia(null);
+                break;
+            }
+        }
+        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud);
+    }
     
     public void setEstrategia(IEstrategia estrategia){
         this.estrategia= estrategia;

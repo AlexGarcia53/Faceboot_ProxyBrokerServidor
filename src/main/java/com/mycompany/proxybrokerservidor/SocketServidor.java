@@ -61,13 +61,12 @@ public class SocketServidor implements Runnable {
             try{
                 solicitud= bufferedReader.readLine();
                 System.out.println(solicitud);
-                respuesta= this.canalizarSolicitud(solicitud);
+                respuesta= ContextoCanalizacion.getInstancia().canalizarSolicitud(solicitud);
                 respuestaSerializada= ProxyServidor.getInstancia().serializarRespuesta(respuesta);
                 System.out.println(respuestaSerializada);
                 retransmitirRespuesta(respuestaSerializada);
             }catch(IOException e){
-                e.printStackTrace();
-//                closeEverything(socket, bufferedReader, bufferedWriter);
+                cerrarTodo(socket, bufferedReader, bufferedWriter);
                 break;
             }
         }
@@ -99,29 +98,29 @@ public class SocketServidor implements Runnable {
         }
     }
     
-    public Solicitud canalizarSolicitud(String solicitud){
-        Solicitud objetoSolicitud = ProxyServidor.getInstancia().deserealizarSolicitud(solicitud);
-        ContextoCanalizacion contextoCanalizacion = new ContextoCanalizacion();
-        Operacion tipoOperacion= objetoSolicitud.getOperacion();
-        switch (tipoOperacion) {
-            case registrar_usuario:{
-                contextoCanalizacion.setEstrategia(new EstrategiaRegistrarUsuario());
-                break;
-            }
-            case iniciar_sesion:{
-                contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesion());
-                break;
-            }
-            case registrar_publicacion:{
-                contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
-                break;
-            }
-            default:{
-                break;
-            }
-        }
-        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud);
-    }
+//    public Solicitud canalizarSolicitud(String solicitud){
+//        Solicitud objetoSolicitud = ProxyServidor.getInstancia().deserealizarSolicitud(solicitud);
+//        ContextoCanalizacion contextoCanalizacion = new ContextoCanalizacion();
+//        Operacion tipoOperacion= objetoSolicitud.getOperacion();
+//        switch (tipoOperacion) {
+//            case registrar_usuario:{
+//                contextoCanalizacion.setEstrategia(new EstrategiaRegistrarUsuario());
+//                break;
+//            }
+//            case iniciar_sesion:{
+//                contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesion());
+//                break;
+//            }
+//            case registrar_publicacion:{
+//                contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
+//                break;
+//            }
+//            default:{
+//                break;
+//            }
+//        }
+//        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud);
+//    }
     
 //    public Solicitud realizarSolicitudRegistrarUsuario(Solicitud solicitud, Usuario usuario){
 //        try{
