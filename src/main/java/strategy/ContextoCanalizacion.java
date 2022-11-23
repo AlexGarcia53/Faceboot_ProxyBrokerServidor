@@ -40,6 +40,10 @@ public class ContextoCanalizacion {
                 contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesion());
                 break;
             }
+            case iniciar_sesion_facebook:{
+                contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesionFacebook());
+                break;
+            }
             case registrar_publicacion:{
                 contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
                 break;
