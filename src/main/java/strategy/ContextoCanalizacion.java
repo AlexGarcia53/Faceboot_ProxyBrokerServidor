@@ -48,6 +48,10 @@ public class ContextoCanalizacion {
                 contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
                 break;
             }
+            case consultar_publicaciones:{
+                contextoCanalizacion.setEstrategia(new EstrategiaConsultarPublicaciones());
+                break;
+            }
             default:{
                 contextoCanalizacion.setEstrategia(null);
                 break;

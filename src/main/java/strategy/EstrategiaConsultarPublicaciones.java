@@ -11,27 +11,28 @@ import dominio.Solicitud;
 import excepciones.ErrorBusquedaUsuarioException;
 import interfaces.IEstrategia;
 import interfaces.ILogica;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public class EstrategiaCrearPublicacion implements IEstrategia{
+public class EstrategiaConsultarPublicaciones implements IEstrategia{
     private ILogica logica;
     
-    public EstrategiaCrearPublicacion(){
+    public EstrategiaConsultarPublicaciones(){
         this.logica= FabricaLogica.crearLogica();
     }
 
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
-        Publicacion publicacion= ProxyServidor.getInstancia().deserealizarPublicacion(solicitud.getSolicitud());
         try {
-            Publicacion respuesta= this.logica.registrarPublicacion(publicacion);
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarPublicacion(respuesta));
+            List<Publicacion> respuesta= this.logica.consultarPublicaciones();
+            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarLista(respuesta));
         } catch (ErrorBusquedaUsuarioException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }
         return solicitud;
     }
+    
 }
