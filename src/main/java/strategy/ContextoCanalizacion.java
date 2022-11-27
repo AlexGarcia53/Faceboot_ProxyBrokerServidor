@@ -8,6 +8,7 @@ import com.mycompany.proxybrokerservidor.ProxyServidor;
 import dominio.Operacion;
 import dominio.Solicitud;
 import interfaces.IEstrategia;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +47,12 @@ public class ContextoCanalizacion {
             }
             case registrar_publicacion:{
                 contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
+                break;
+            }
+             case enviar_notificación:{
+                 //vamos bien
+                 System.out.println("Antes de entrar");
+                contextoCanalizacion.setEstrategia(new EstrategiaNotificar());
                 break;
             }
             default:{

@@ -24,6 +24,7 @@ public class EstrategiaCrearPublicacion implements IEstrategia{
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try {
+            
             solicitud.setRespuesta("Se llevó a cabo el registro");
         } catch (ErrorBusquedaUsuarioException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
