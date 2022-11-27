@@ -50,8 +50,7 @@ public class ContextoCanalizacion {
                 break;
             }
              case enviar_notificación:{
-                 //vamos bien
-                 System.out.println("Antes de entrar");
+                 
                 contextoCanalizacion.setEstrategia(new EstrategiaNotificar());
                 break;
             }
