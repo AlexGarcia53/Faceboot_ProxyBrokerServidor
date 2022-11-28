@@ -52,6 +52,22 @@ public class ContextoCanalizacion {
                 contextoCanalizacion.setEstrategia(new EstrategiaConsultarPublicaciones());
                 break;
             }
+            case editar_publicacion:{
+                contextoCanalizacion.setEstrategia(new EstrategiaEditarPublicacion());
+                break;
+            }
+            case eliminar_publicacion:{
+                contextoCanalizacion.setEstrategia(new EstrategiaEliminarPublicacion());
+                break;
+            }
+            case registrar_comentario:{
+                contextoCanalizacion.setEstrategia(new EstrategiaRegistrarComentario());
+                break;
+            }
+            case editar_comentario:{
+                contextoCanalizacion.setEstrategia(new EstrategiaEditarComentario());
+                break;
+            }
             default:{
                 contextoCanalizacion.setEstrategia(null);
                 break;
