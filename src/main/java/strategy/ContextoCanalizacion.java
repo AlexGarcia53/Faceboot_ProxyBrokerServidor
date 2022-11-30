@@ -81,7 +81,7 @@ public class ContextoCanalizacion {
                 break;
             }
         }
-        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud);
+        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud); 
     }
     
     public void setEstrategia(IEstrategia estrategia){

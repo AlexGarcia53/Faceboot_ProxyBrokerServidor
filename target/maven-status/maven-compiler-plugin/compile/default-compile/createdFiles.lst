@@ -1,4 +1,5 @@
 interfaces\IEstrategia.class
+strategy\EstrategiaEditarUsuario.class
 strategy\EstrategiaEliminarPublicacion.class
 strategy\EstrategiaRegistrarUsuario.class
 strategy\ContextoCanalizacion$1.class

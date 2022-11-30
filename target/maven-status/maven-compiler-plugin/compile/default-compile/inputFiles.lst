@@ -2,6 +2,7 @@ C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strat
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarPublicacion.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarPublicaciones.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarComentario.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarUsuario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEliminarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\SocketServidor.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\interfaces\IEstrategia.java
