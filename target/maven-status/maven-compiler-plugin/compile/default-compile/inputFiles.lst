@@ -1,10 +1,15 @@
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEliminarPublicacion.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarPublicacion.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarPublicaciones.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarComentario.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEliminarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\SocketServidor.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\interfaces\IEstrategia.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaIniciarSesionFacebook.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\ContextoCanalizacion.java
-C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarPublicaciones.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaCrearPublicacion.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\Servidor.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarUsuario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\ProxyServidor.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaIniciarSesion.java

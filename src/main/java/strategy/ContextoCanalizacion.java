@@ -68,6 +68,14 @@ public class ContextoCanalizacion {
                 contextoCanalizacion.setEstrategia(new EstrategiaEditarComentario());
                 break;
             }
+            case eliminar_comentario:{
+                contextoCanalizacion.setEstrategia(new EstrategiaEliminarComentario());
+                break;
+            }
+            case editar_perfil:{
+                contextoCanalizacion.setEstrategia(new EstrategiaEditarUsuario());
+                break;
+            }
             default:{
                 contextoCanalizacion.setEstrategia(null);
                 break;
