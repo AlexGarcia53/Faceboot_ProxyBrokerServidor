@@ -76,6 +76,14 @@ public class ContextoCanalizacion {
                 contextoCanalizacion.setEstrategia(new EstrategiaEditarUsuario());
                 break;
             }
+            case consultar_usuarioNombre:{
+                contextoCanalizacion.setEstrategia(new EstrategiaConsultarUsuarioNombre());
+                break;
+            }
+            case registrar_mensaje:{
+                contextoCanalizacion.setEstrategia(new EstrategiaEnviarMensaje());
+                break;
+            }
             default:{
                 contextoCanalizacion.setEstrategia(null);
                 break;

@@ -4,6 +4,7 @@ C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strat
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarUsuario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEliminarComentario.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEnviarMensaje.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\SocketServidor.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\interfaces\IEstrategia.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaIniciarSesionFacebook.java
@@ -13,4 +14,5 @@ C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\m
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarUsuario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\ProxyServidor.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarUsuarioNombre.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaIniciarSesion.java
