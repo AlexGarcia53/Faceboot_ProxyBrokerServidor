@@ -9,7 +9,7 @@ import dominio.Mensaje;
 import dominio.Solicitud;
 import excepciones.ErrorEnviarMensajeException;
 import interfaces.IEstrategia;
-import notificacionesDecorator.FNotificaciones;
+import notificacionesDecorator.FabricaNotificaciones;
 import notificacionesDecorator.INotificaciones;
 
 /**
@@ -20,7 +20,7 @@ public class EstrategiaEnviarMensaje implements IEstrategia{
     private INotificaciones notificacion;
     
     public EstrategiaEnviarMensaje(){
-        notificacion= new FNotificaciones();
+        notificacion= FabricaNotificaciones.getInstancia().obtenerNotificaciones();
     }
     
     @Override
