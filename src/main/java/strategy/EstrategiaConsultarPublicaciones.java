@@ -5,10 +5,10 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Publicacion;
 import dominio.Solicitud;
-import excepciones.ErrorBusquedaUsuarioException;
+import excepciones.ErrorBusquedaPublicacionesException;
 import interfaces.IEstrategia;
 import interfaces.ILogica;
 import java.util.List;
@@ -28,8 +28,8 @@ public class EstrategiaConsultarPublicaciones implements IEstrategia{
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try {
             List<Publicacion> respuesta= this.logica.consultarPublicaciones();
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarLista(respuesta));
-        } catch (ErrorBusquedaUsuarioException e) {
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarLista(respuesta));
+        } catch (ErrorBusquedaPublicacionesException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }
         return solicitud;

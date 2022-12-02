@@ -5,7 +5,7 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Solicitud;
 import dominio.Usuario;
 import excepciones.ErrorEditarUsuarioException;
@@ -25,10 +25,10 @@ public class EstrategiaEditarUsuario implements IEstrategia{
     
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
-        Usuario datosUsuario= ProxyServidor.getInstancia().deserealizarUsuario(solicitud.getSolicitud());
+        Usuario datosUsuario= Deserealizador.getInstancia().deserealizarUsuario(solicitud.getSolicitud());
         try{
             Usuario respuestaServidor= logica.editarPerfilUsuario(datosUsuario);
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarUsuario(respuestaServidor));
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarUsuario(respuestaServidor));
         } catch (ErrorEditarUsuarioException e){
             solicitud.setRespuesta("Excepción: "+e.getMessage());
         }

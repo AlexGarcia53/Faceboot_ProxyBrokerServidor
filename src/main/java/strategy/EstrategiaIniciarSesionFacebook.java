@@ -5,7 +5,7 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Solicitud;
 import dominio.Usuario;
 import excepciones.ErrorBusquedaUsuarioException;
@@ -25,13 +25,13 @@ public class EstrategiaIniciarSesionFacebook implements IEstrategia {
     
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
-        Usuario datosUsuario= ProxyServidor.getInstancia().deserealizarUsuario(solicitud.getSolicitud());
+        Usuario datosUsuario= Deserealizador.getInstancia().deserealizarUsuario(solicitud.getSolicitud());
         try {
             Usuario usuario = logica.consultarUsuarioPorAToken(datosUsuario);
             if(usuario==null){
                usuario = logica.registrarUsuarioFacebook(datosUsuario);
             }
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarUsuario(usuario));
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarUsuario(usuario));
         } catch (ErrorBusquedaUsuarioException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }

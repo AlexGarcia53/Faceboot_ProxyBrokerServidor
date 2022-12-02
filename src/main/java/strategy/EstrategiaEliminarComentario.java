@@ -5,7 +5,7 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Comentario;
 import dominio.Solicitud;
 import excepciones.ErrorEliminarComentarioException;
@@ -25,10 +25,10 @@ public class EstrategiaEliminarComentario implements IEstrategia{
 
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
-        Comentario comentario= ProxyServidor.getInstancia().deserealizarComentario(solicitud.getSolicitud());
+        Comentario comentario= Deserealizador.getInstancia().deserealizarComentario(solicitud.getSolicitud());
         try {
             Comentario respuesta= this.logica.eliminarComentario(comentario);
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarComentario(respuesta));
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarComentario(respuesta));
         } catch (ErrorEliminarComentarioException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }

@@ -33,7 +33,7 @@ import strategy.EstrategiaRegistrarUsuario;
  * @author Admin
  */
 public class SocketServidor implements Runnable {
-    private ILogica logica;
+//    private ILogica logica;
 //    private SocketServidor socketServidor;
     private Socket socket;
     private BufferedReader bufferedReader;
@@ -47,7 +47,7 @@ public class SocketServidor implements Runnable {
             this.bufferedReader= new BufferedReader(new InputStreamReader(socket.getInputStream()));
 //            this.socketServidor=this;
 //            this.proxyServidor= new ProxyServidor();
-            this.logica= FabricaLogica.crearLogica();
+//            this.logica= FabricaLogica.crearLogica();
         } catch (IOException e){
             cerrarTodo(this.socket, bufferedReader, bufferedWriter);
         }
@@ -59,14 +59,16 @@ public class SocketServidor implements Runnable {
         
         while(socket.isConnected()){
             try{
-                solicitud= bufferedReader.readLine();
+                solicitud = bufferedReader.readLine();
                 System.out.println(solicitud);
-                respuesta= ContextoCanalizacion.getInstancia().canalizarSolicitud(solicitud);
-                respuestaSerializada= ProxyServidor.getInstancia().serializarRespuesta(respuesta);
+                respuesta = ContextoCanalizacion.getInstancia().canalizarSolicitud(solicitud);
+                respuestaSerializada = Deserealizador.getInstancia().serializarRespuesta(respuesta);
                 System.out.println(respuestaSerializada);
                 retransmitirRespuesta(respuestaSerializada);
             }catch(IOException e){
                 cerrarTodo(socket, bufferedReader, bufferedWriter);
+                break;
+            }catch(NullPointerException e){
                 break;
             }
         }

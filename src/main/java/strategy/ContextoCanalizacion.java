@@ -4,7 +4,7 @@
  */
 package strategy;
 
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Operacion;
 import dominio.Solicitud;
 import interfaces.IEstrategia;
@@ -29,67 +29,67 @@ public class ContextoCanalizacion {
     }
     
     public Solicitud canalizarSolicitud(String solicitud){
-        Solicitud objetoSolicitud = ProxyServidor.getInstancia().deserealizarSolicitud(solicitud);
-        Operacion tipoOperacion= objetoSolicitud.getOperacion();
+        Solicitud objetoSolicitud = Deserealizador.getInstancia().deserealizarSolicitud(solicitud);
+        Operacion tipoOperacion = objetoSolicitud.getOperacion();
         switch (tipoOperacion) {
-            case registrar_usuario:{
+            case registrar_usuario: {
                 contextoCanalizacion.setEstrategia(new EstrategiaRegistrarUsuario());
                 break;
             }
-            case iniciar_sesion:{
+            case iniciar_sesion: {
                 contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesion());
                 break;
             }
-            case iniciar_sesion_facebook:{
+            case iniciar_sesion_facebook: {
                 contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesionFacebook());
                 break;
             }
-            case registrar_publicacion:{
+            case registrar_publicacion: {
                 contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
                 break;
             }
-            case consultar_publicaciones:{
+            case consultar_publicaciones: {
                 contextoCanalizacion.setEstrategia(new EstrategiaConsultarPublicaciones());
                 break;
             }
-            case editar_publicacion:{
+            case editar_publicacion: {
                 contextoCanalizacion.setEstrategia(new EstrategiaEditarPublicacion());
                 break;
             }
-            case eliminar_publicacion:{
+            case eliminar_publicacion: {
                 contextoCanalizacion.setEstrategia(new EstrategiaEliminarPublicacion());
                 break;
             }
-            case registrar_comentario:{
+            case registrar_comentario: {
                 contextoCanalizacion.setEstrategia(new EstrategiaRegistrarComentario());
                 break;
             }
-            case editar_comentario:{
+            case editar_comentario: {
                 contextoCanalizacion.setEstrategia(new EstrategiaEditarComentario());
                 break;
             }
-            case eliminar_comentario:{
+            case eliminar_comentario: {
                 contextoCanalizacion.setEstrategia(new EstrategiaEliminarComentario());
                 break;
             }
-            case editar_perfil:{
+            case editar_perfil: {
                 contextoCanalizacion.setEstrategia(new EstrategiaEditarUsuario());
                 break;
             }
-            case consultar_usuarioNombre:{
+            case consultar_usuarioNombre: {
                 contextoCanalizacion.setEstrategia(new EstrategiaConsultarUsuarioNombre());
                 break;
             }
-            case registrar_mensaje:{
+            case registrar_mensaje: {
                 contextoCanalizacion.setEstrategia(new EstrategiaEnviarMensaje());
                 break;
             }
-            default:{
-                contextoCanalizacion.setEstrategia(null);
+            case consultar_publicacionesHashtag:{
+                contextoCanalizacion.setEstrategia(new EstrategiaConsultarPublicacionesHashtag());
                 break;
             }
         }
-        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud); 
+        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud);
     }
     
     public void setEstrategia(IEstrategia estrategia){

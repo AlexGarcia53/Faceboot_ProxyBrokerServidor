@@ -5,7 +5,7 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Publicacion;
 import dominio.Solicitud;
 import excepciones.ErrorGuardarPublicacionException;
@@ -25,10 +25,10 @@ public class EstrategiaEditarPublicacion implements IEstrategia {
 
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
-        Publicacion publicacion= ProxyServidor.getInstancia().deserealizarPublicacion(solicitud.getSolicitud());
+        Publicacion publicacion= Deserealizador.getInstancia().deserealizarPublicacion(solicitud.getSolicitud());
         try {
             Publicacion respuesta= this.logica.editarPublicacion(publicacion);
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarPublicacion(respuesta));
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarPublicacion(respuesta));
         } catch (ErrorGuardarPublicacionException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }

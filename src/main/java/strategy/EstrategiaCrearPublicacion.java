@@ -5,7 +5,7 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Hashtag;
 import dominio.Publicacion;
 import dominio.Solicitud;
@@ -29,11 +29,11 @@ public class EstrategiaCrearPublicacion implements IEstrategia{
 
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
-        Publicacion publicacion= ProxyServidor.getInstancia().deserealizarPublicacion(solicitud.getSolicitud());
+        Publicacion publicacion= Deserealizador.getInstancia().deserealizarPublicacion(solicitud.getSolicitud());
         try {
 //            if (publicacion.getContenido().getHashtags().size() == 0) {
                 Publicacion respuesta = this.logica.registrarPublicacion(publicacion);
-                solicitud.setRespuesta(ProxyServidor.getInstancia().serializarPublicacion(respuesta));
+                solicitud.setRespuesta(Deserealizador.getInstancia().serializarPublicacion(respuesta));
 //            }else{
 //                List<Hashtag> hashtags= publicacion.getContenido().getHashtags();
 //                publicacion.getContenido().setHashtags(new ArrayList<>());
@@ -46,7 +46,7 @@ public class EstrategiaCrearPublicacion implements IEstrategia{
 //                    hashtagsRegistrados.add(hashtagRespuesta);
 //                }
 //                respuesta.getContenido().setHashtags(hashtagsRegistrados);
-//                solicitud.setRespuesta(ProxyServidor.getInstancia().serializarPublicacion(respuesta));
+//                solicitud.setRespuesta(Deserealizador.getInstancia().serializarPublicacion(respuesta));
 //            }
         } catch (ErrorGuardarPublicacionException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());

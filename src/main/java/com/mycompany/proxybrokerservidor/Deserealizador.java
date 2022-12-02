@@ -7,6 +7,7 @@ package com.mycompany.proxybrokerservidor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.logicafaceboot.FabricaLogica;
 import dominio.Comentario;
+import dominio.Hashtag;
 import dominio.Mensaje;
 import dominio.Publicacion;
 import dominio.Solicitud;
@@ -19,19 +20,19 @@ import java.util.List;
  *
  * @author Admin
  */
-public class ProxyServidor {
+public class Deserealizador {
     
-    private static ProxyServidor proxyServidor;
+    private static Deserealizador deserealizador;
     
-    private ProxyServidor(){
+    private Deserealizador(){
         
     }
     
-    public static ProxyServidor getInstancia(){
-        if(ProxyServidor.proxyServidor==null){
-            ProxyServidor.proxyServidor= new ProxyServidor();
+    public static Deserealizador getInstancia(){
+        if(Deserealizador.deserealizador==null){
+            Deserealizador.deserealizador= new Deserealizador();
         }
-        return ProxyServidor.proxyServidor;
+        return Deserealizador.deserealizador;
     }
     
     public String serializarUsuario(Usuario usuario){
@@ -144,6 +145,27 @@ public class ProxyServidor {
         try{
             ObjectMapper conversion= new ObjectMapper();
             return conversion.readValue(mensaje, Mensaje.class);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    public String serializarHashtag(Hashtag hashtag){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String solicitudSerializada = mapper.writeValueAsString(hashtag);
+            return solicitudSerializada;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Hashtag deserealizarHashtag(String hashtag){
+        try{
+            ObjectMapper conversion= new ObjectMapper();
+            return conversion.readValue(hashtag, Hashtag.class);
         } catch(Exception e){
             System.out.println(e.getMessage());
         }

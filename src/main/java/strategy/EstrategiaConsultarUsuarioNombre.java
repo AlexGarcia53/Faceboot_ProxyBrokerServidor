@@ -5,7 +5,7 @@
 package strategy;
 
 import com.mycompany.logicafaceboot.FabricaLogica;
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Usuario;
 import dominio.Solicitud;
 import excepciones.ErrorBusquedaUsuarioException;
@@ -27,8 +27,8 @@ public class EstrategiaConsultarUsuarioNombre implements IEstrategia{
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try {
-            Usuario respuesta= this.logica.consultarUsuarioNombre(ProxyServidor.getInstancia().deserealizarUsuario(solicitud.getSolicitud()));
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarUsuario(respuesta));
+            Usuario respuesta= this.logica.consultarUsuarioNombre(Deserealizador.getInstancia().deserealizarUsuario(solicitud.getSolicitud()));
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarUsuario(respuesta));
         } catch (ErrorBusquedaUsuarioException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
         }

@@ -4,7 +4,7 @@
  */
 package strategy;
 
-import com.mycompany.proxybrokerservidor.ProxyServidor;
+import com.mycompany.proxybrokerservidor.Deserealizador;
 import dominio.Mensaje;
 import dominio.Solicitud;
 import excepciones.ErrorEnviarMensajeException;
@@ -26,8 +26,8 @@ public class EstrategiaEnviarMensaje implements IEstrategia{
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try{
-            Mensaje respuesta= this.notificacion.enviarNotificacion(ProxyServidor.getInstancia().deserealizarMensaje(solicitud.getSolicitud()));
-            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarMensaje(respuesta));
+            Mensaje respuesta= this.notificacion.enviarNotificacion(Deserealizador.getInstancia().deserealizarMensaje(solicitud.getSolicitud()));
+            solicitud.setRespuesta(Deserealizador.getInstancia().serializarMensaje(respuesta));
         } catch(ErrorEnviarMensajeException e){
             solicitud.setRespuesta("Excepción: "+e.getMessage());
         }
