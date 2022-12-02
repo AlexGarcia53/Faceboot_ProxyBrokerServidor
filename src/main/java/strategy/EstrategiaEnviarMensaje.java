@@ -13,16 +13,26 @@ import notificacionesDecorator.FabricaNotificaciones;
 import notificacionesDecorator.INotificaciones;
 
 /**
- *
- * @author Admin
+ * Clase que representa la estrategia para resolver una solicitud de enviar mensaje.
+ * @author Equipo Broker.
  */
 public class EstrategiaEnviarMensaje implements IEstrategia{
+    /**
+     * Atributo del tipo lógica.
+     */
     private INotificaciones notificacion;
-    
+    /**
+     * Método constructor de la clase.
+     */
     public EstrategiaEnviarMensaje(){
         notificacion= FabricaNotificaciones.getInstancia().obtenerNotificaciones();
     }
-    
+    /**
+     * Método utilizado para atender una solicitud la cual recibe como parámetro, hace uso de 
+     * las funcionalidades del servidor para atender y responder a ella.
+     * @param solicitud Solicitud a atender.
+     * @return Respuesta a la solicitud.
+     */
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try{

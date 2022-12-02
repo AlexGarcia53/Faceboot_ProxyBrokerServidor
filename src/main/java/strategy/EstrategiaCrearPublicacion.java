@@ -17,42 +17,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Admin
+ * Clase que representa la estrategia para resolver una solicitud de crear publicación.
+ * @author Equipo Broker.
  */
 public class EstrategiaCrearPublicacion implements IEstrategia{
+    /**
+     * Atributo del tipo lógica.
+     */
     private ILogica logica;
-    
+    /**
+     * Método constructor de la clase.
+     */
     public EstrategiaCrearPublicacion(){
         this.logica= FabricaLogica.crearLogica();
     }
-
+    /**
+     * Método utilizado para atender una solicitud la cual recibe como parámetro, hace uso de 
+     * las funcionalidades del servidor para atender y responder a ella.
+     * @param solicitud Solicitud a atender.
+     * @return Respuesta a la solicitud.
+     */
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         Publicacion publicacion= Deserealizador.getInstancia().deserealizarPublicacion(solicitud.getSolicitud());
         try {
-//            if (publicacion.getContenido().getHashtags().size() == 0) {
                 Publicacion respuesta = this.logica.registrarPublicacion(publicacion);
                 solicitud.setRespuesta(Deserealizador.getInstancia().serializarPublicacion(respuesta));
-//            }else{
-//                List<Hashtag> hashtags= publicacion.getContenido().getHashtags();
-//                publicacion.getContenido().setHashtags(new ArrayList<>());
-//                Publicacion respuesta= this.logica.registrarPublicacion(publicacion);
-//                List<Hashtag> hashtagsRegistrados= new ArrayList<>();
-//                for (int i = 0; i < hashtags.size(); i++) {
-//                    Hashtag hashtag= hashtags.get(i);
-//                    hashtag.setContenido(respuesta.getContenido());
-//                    Hashtag hashtagRespuesta= this.logica.registrarHashtag(hashtag);
-//                    hashtagsRegistrados.add(hashtagRespuesta);
-//                }
-//                respuesta.getContenido().setHashtags(hashtagsRegistrados);
-//                solicitud.setRespuesta(Deserealizador.getInstancia().serializarPublicacion(respuesta));
-//            }
+
         } catch (ErrorGuardarPublicacionException e) {
             solicitud.setRespuesta("Excepción: " + e.getMessage());
-        } //catch (ErrorGuardarHashtagException e) {
-//            solicitud.setRespuesta("Excepción: "+e.getMessage());
-//        }
+        } 
         return solicitud;
     }
 }

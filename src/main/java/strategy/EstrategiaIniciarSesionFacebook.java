@@ -13,16 +13,26 @@ import interfaces.IEstrategia;
 import interfaces.ILogica;
 
 /**
- *
- * @author Gael
+ * Clase que representa la estrategia para resolver una solicitud de iniciar sesión con facebook.
+ * @author Equipo Broker.
  */
 public class EstrategiaIniciarSesionFacebook implements IEstrategia {
+    /**
+     * Atributo del tipo lógica.
+     */
     private ILogica logica;
-    
+    /**
+     * Método constructor de la clase.
+     */
     public EstrategiaIniciarSesionFacebook(){
         this.logica= FabricaLogica.crearLogica();
     }
-    
+    /**
+     * Método utilizado para atender una solicitud la cual recibe como parámetro, hace uso de 
+     * las funcionalidades del servidor para atender y responder a ella.
+     * @param solicitud Solicitud a atender.
+     * @return Respuesta a la solicitud.
+     */
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         Usuario datosUsuario= Deserealizador.getInstancia().deserealizarUsuario(solicitud.getSolicitud());

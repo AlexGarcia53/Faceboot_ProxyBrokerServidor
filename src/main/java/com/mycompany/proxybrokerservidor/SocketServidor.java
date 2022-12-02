@@ -29,30 +29,40 @@ import strategy.EstrategiaIniciarSesion;
 import strategy.EstrategiaRegistrarUsuario;
 
 /**
- *
- * @author Admin
+ * Clase que representa a las peticiones que llegan al servidor y contiene los métodos necesarios 
+ * para que pueda etender las solicitudes y enviar respuestas.
+ * @author Equipo Broker.
  */
 public class SocketServidor implements Runnable {
-//    private ILogica logica;
-//    private SocketServidor socketServidor;
+    /**
+     * Atributo que contiene el socket de la conexión.
+     */
     private Socket socket;
+    /**
+     * Atributo con el buffered reader de la conexión para leer datos.
+     */
     private BufferedReader bufferedReader;
+    /**
+     * Atributo con el buffered writer de la conexión para escribir datos.
+     */
     private BufferedWriter bufferedWriter;
-//    private ProxyServidor proxyServidor;
-    
+    /**
+     * Método constructor de la clase que inicializa los atributos.
+     * @param socket Socket con la conexión del cliente.
+     */
     public SocketServidor(Socket socket){
         try{
             this.socket= socket;
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader= new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            this.socketServidor=this;
-//            this.proxyServidor= new ProxyServidor();
-//            this.logica= FabricaLogica.crearLogica();
         } catch (IOException e){
             cerrarTodo(this.socket, bufferedReader, bufferedWriter);
         }
     }
-    
+    /**
+     * Método utilizado para escuchar las peticiones del broker y canalizarlas para así poder dar una respuesta, 
+     * todo esto mediante un hilo.
+     */
     @Override
     public void run() {
         String solicitud, respuestaSerializada; Solicitud respuesta;
@@ -73,7 +83,10 @@ public class SocketServidor implements Runnable {
             }
         }
     }
-    
+    /**
+     * Método utilizado para enviar una respuesta al cliente para la solicitud que realizó.
+     * @param respuesta Respuesta que se enviará al cliente.
+     */
     public void retransmitirRespuesta(String respuesta){
         try{
             this.bufferedWriter.write(respuesta);
@@ -83,7 +96,12 @@ public class SocketServidor implements Runnable {
             cerrarTodo(socket, bufferedReader, bufferedWriter);
         }
     }
-    
+    /**
+     * Método utilizado para cerrar la conexión.
+     * @param socket Socket de la conexión.
+     * @param bufferedReader Buffered Reader de la conexión.
+     * @param bufferedWriter Buffered Writer de la conexión.
+     */
     public void cerrarTodo(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try{
             if(bufferedReader != null){
@@ -99,59 +117,4 @@ public class SocketServidor implements Runnable {
             e.printStackTrace();
         }
     }
-    
-//    public Solicitud canalizarSolicitud(String solicitud){
-//        Solicitud objetoSolicitud = ProxyServidor.getInstancia().deserealizarSolicitud(solicitud);
-//        ContextoCanalizacion contextoCanalizacion = new ContextoCanalizacion();
-//        Operacion tipoOperacion= objetoSolicitud.getOperacion();
-//        switch (tipoOperacion) {
-//            case registrar_usuario:{
-//                contextoCanalizacion.setEstrategia(new EstrategiaRegistrarUsuario());
-//                break;
-//            }
-//            case iniciar_sesion:{
-//                contextoCanalizacion.setEstrategia(new EstrategiaIniciarSesion());
-//                break;
-//            }
-//            case registrar_publicacion:{
-//                contextoCanalizacion.setEstrategia(new EstrategiaCrearPublicacion());
-//                break;
-//            }
-//            default:{
-//                break;
-//            }
-//        }
-//        return contextoCanalizacion.ejecutarEstrategia(objetoSolicitud);
-//    }
-    
-//    public Solicitud realizarSolicitudRegistrarUsuario(Solicitud solicitud, Usuario usuario){
-//        try{
-//            Usuario usuarioRegistrado= logica.registrarUsuario(usuario);
-//            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarUsuario(usuarioRegistrado));
-//        } catch(ErrorGuardarUsuarioException e){
-//            System.out.println("si entro al catch");
-//            solicitud.setRespuesta("Excepción: "+e.getMessage());
-//        }
-//        return solicitud;
-//    }
-//    
-//    public Solicitud realizarInicioSesion(Solicitud solicitud, Usuario usuario) {
-//        try {
-//            Usuario usuarioRegistrado = logica.consultarUsuario(usuario);
-//            solicitud.setRespuesta(ProxyServidor.getInstancia().serializarUsuario(usuarioRegistrado));
-//        } catch (ErrorBusquedaUsuarioException e) {
-//            solicitud.setRespuesta("Excepción: " + e.getMessage());
-//        }
-//        return solicitud;
-//    }
-//
-//    public Solicitud realizarPublicacion(Solicitud solicitud, Publicacion publicacion) {
-//        try {
-//            //Publicacion publicacionRegistrada = logica.registrarPublicacion(publicacion);
-//            solicitud.setRespuesta("Se llevó a cabo el registro");
-//        } catch (ErrorBusquedaUsuarioException e) {
-//            solicitud.setRespuesta("Excepción: " + e.getMessage());
-//        }
-//        return solicitud;
-//    }
 }

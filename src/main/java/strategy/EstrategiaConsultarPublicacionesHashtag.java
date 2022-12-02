@@ -17,15 +17,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Admin
+ * Clase que representa la estrategia para resolver una solicitud de consultar publicaciones por hashtag.
+ * @author Equipo Broker.
  */
 public class EstrategiaConsultarPublicacionesHashtag implements IEstrategia{
+    /**
+     * Atributo del tipo lógica.
+     */
     private ILogica logica;
-    
+    /**
+     * Método constructor de la clase.
+     */
     public EstrategiaConsultarPublicacionesHashtag(){
         this.logica= FabricaLogica.crearLogica();
     }
+    /**
+     * Método utilizado para atender una solicitud la cual recibe como parámetro, hace uso de 
+     * las funcionalidades del servidor para atender y responder a ella.
+     * @param solicitud Solicitud a atender.
+     * @return Respuesta a la solicitud.
+     */
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try {

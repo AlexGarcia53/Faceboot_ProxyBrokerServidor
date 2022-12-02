@@ -14,16 +14,26 @@ import interfaces.ILogica;
 import java.util.List;
 
 /**
- *
- * @author Admin
+ * Clase que representa la estrategia para resolver una solicitud de consultar usuario por el nombre.
+ * @author Equipo Broker.
  */
 public class EstrategiaConsultarUsuarioNombre implements IEstrategia{
+    /**
+     * Atributo del tipo lógica.
+     */
     private ILogica logica;
-    
+    /**
+     * Método constructor de la clase.
+     */
     public EstrategiaConsultarUsuarioNombre(){
         this.logica= FabricaLogica.crearLogica();
     }
-    
+    /**
+     * Método utilizado para atender una solicitud la cual recibe como parámetro, hace uso de 
+     * las funcionalidades del servidor para atender y responder a ella.
+     * @param solicitud Solicitud a atender.
+     * @return Respuesta a la solicitud.
+     */
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         try {

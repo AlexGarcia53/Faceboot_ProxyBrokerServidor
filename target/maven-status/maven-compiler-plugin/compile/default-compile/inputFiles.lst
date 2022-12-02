@@ -3,6 +3,7 @@ C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strat
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarPublicaciones.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarUsuario.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarPublicacionesHashtag.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEliminarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEnviarMensaje.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\SocketServidor.java
@@ -11,8 +12,8 @@ C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strat
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\ContextoCanalizacion.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaCrearPublicacion.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\Servidor.java
+C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\Deserealizador.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaEditarComentario.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaRegistrarUsuario.java
-C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\com\mycompany\proxybrokerservidor\ProxyServidor.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaConsultarUsuarioNombre.java
 C:\Users\Admin\Documents\GitHub\Faceboot_ProxyBrokerServidor\src\main\java\strategy\EstrategiaIniciarSesion.java

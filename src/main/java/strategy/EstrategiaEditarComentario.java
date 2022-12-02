@@ -13,16 +13,26 @@ import interfaces.IEstrategia;
 import interfaces.ILogica;
 
 /**
- *
- * @author Admin
+ * Clase que representa la estrategia para resolver una solicitud de editar comentario.
+ * @author Equipo Broker.
  */
 public class EstrategiaEditarComentario implements IEstrategia {
+    /**
+     * Atributo del tipo lógica.
+     */
     private ILogica logica;
-    
+    /**
+     * Método constructor de la clase.
+     */
     public EstrategiaEditarComentario(){
         this.logica= FabricaLogica.crearLogica();
     }
-
+    /**
+     * Método utilizado para atender una solicitud la cual recibe como parámetro, hace uso de 
+     * las funcionalidades del servidor para atender y responder a ella.
+     * @param solicitud Solicitud a atender.
+     * @return Respuesta a la solicitud.
+     */
     @Override
     public Solicitud realizarSolicitud(Solicitud solicitud) {
         Comentario comentario= Deserealizador.getInstancia().deserealizarComentario(solicitud.getSolicitud());

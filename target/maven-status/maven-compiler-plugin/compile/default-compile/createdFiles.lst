@@ -5,7 +5,7 @@ strategy\EstrategiaRegistrarUsuario.class
 strategy\EstrategiaEnviarMensaje.class
 strategy\ContextoCanalizacion$1.class
 strategy\EstrategiaRegistrarComentario.class
-com\mycompany\proxybrokerservidor\ProxyServidor.class
+com\mycompany\proxybrokerservidor\Deserealizador.class
 strategy\EstrategiaEditarComentario.class
 strategy\EstrategiaIniciarSesion.class
 strategy\EstrategiaIniciarSesionFacebook.class
@@ -13,6 +13,7 @@ strategy\EstrategiaEliminarComentario.class
 com\mycompany\proxybrokerservidor\Servidor.class
 strategy\EstrategiaConsultarUsuarioNombre.class
 strategy\EstrategiaEditarPublicacion.class
+strategy\EstrategiaConsultarPublicacionesHashtag.class
 strategy\ContextoCanalizacion.class
 strategy\EstrategiaConsultarPublicaciones.class
 strategy\EstrategiaCrearPublicacion.class
